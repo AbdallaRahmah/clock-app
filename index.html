@@ -3,28 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>clock</title>
+    <meta name="author" content="Abdalla Rahmah" />
+    <meta name="description" content="stop watch application" />
+    <meta name="keywords" content="watch, clock, stop" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Stop Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <main>
-      <div class="stopwatch">
-        <h2>stop watch</h2>
-        <div class="spans">
-          <span id="hour">00</span>
-          <span class="second">:</span>
-          <span id="min">00</span>
-          <span class="second">:</span>
-          <span id="sec">00</span>
-        </div>
-        <div class="buttons">
-          <button id="reset">reset</button>
-          <button id="stop" disabled>stop</button>
-          <button id="start">start</button>
-        </div>
+      <h1 class="header">stop watch</h1>
+      <div class="counter">
+        <span id="hour">00</span>
+        <span>:</span>
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+      </div>
+      <div class="controls">
+        <button id="reset">reset</button>
+        <button id="stop" disabled>stop</button>
+        <button id="start">start</button>
       </div>
     </main>
-    <!-- start scripts -->
-    <script src="js/main.js"></script>
   </body>
 </html>

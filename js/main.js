@@ -1,103 +1,106 @@
-// the buttons var
 const startBtn = document.getElementById("start");
 
-// the buttons var
 const stopBtn = document.getElementById("stop");
 
-// the buttons var
 const resetBtn = document.getElementById("reset");
 
-// the inner elements
 let seconds = document.getElementById("sec");
 
-// the inner elements
 let minutes = document.getElementById("min");
 
-// the inner elements
 let hours = document.getElementById("hour");
 
-// the start button wich make the timer start
+let watch = {
+  hours: 00,
+  minutes: 00,
+  seconds: 00,
+
+  get getHours() {
+    return this.hours;
+  },
+  set updateHours(val) {
+    this.hours = val;
+  },
+
+  get getMinutes() {
+    return this.minutes;
+  },
+  set updateMinutes(val) {
+    this.minutes = val;
+  },
+
+  get getSeconds() {
+    return this.seconds;
+  },
+  set updateSeconds(val) {
+    this.seconds = val;
+  },
+};
+
 startBtn.addEventListener("click", () => {
-  
   stopBtn.removeAttribute("disabled", "");
-
-  increse();
-
   startBtn.setAttribute("disabled", "");
 
-  let id = setInterval(increse, 100);
+  startwatch();
 
-  // the stop button that stops the timer
+  let id = setInterval(startwatch, 100);
+
   stopBtn.addEventListener("click", () => {
-    clearInterval(id);
-
     stopBtn.setAttribute("disabled", "");
-
     startBtn.removeAttribute("disabled", "");
+
+    clearInterval(id);
   });
 
-  // the reset btn reset the timer to 00 and stop the timer
   resetBtn.addEventListener("click", () => {
+    stopBtn.setAttribute("disabled", "");
+    startBtn.removeAttribute("disabled", "");
+
     clearInterval(id);
+
+    watch.updateHours = 0;
+    watch.updateMinutes = 0;
+    watch.updateSeconds = 0;
 
     seconds.innerHTML = "00";
     minutes.innerHTML = "00";
     hours.innerHTML = "00";
-
-    stopBtn.setAttribute("disabled", "");
-
-    startBtn.removeAttribute("disabled", "");
   });
 });
 
-function increse() {
-  let a = checkSeconds(seconds.innerHTML);
-  if (a < 0) {
-    let b = checkMinutes(minutes.innerHTML);
-    if (b < 0) {
-      let c = checkHours(hours.innerHTML);
-      c++;
-      if (a <= 9) {
-        hours.innerHTML = "0" + c;
-      } else {
-        hours.innerHTML = c;
-      }
-    }
-    b++;
-    if (a <= 9) {
-      minutes.innerHTML = "0" + b;
+function startwatch() {
+  if (watch.getSeconds >= 10) {
+    watch.updateSeconds = 0;
+    increseMinutes();
+  } else {
+    watch.updateSeconds = watch.getSeconds + 1;
+    if (watch.getSeconds <= 9) {
+      seconds.innerHTML = "0" + watch.getSeconds;
     } else {
-      minutes.innerHTML = b;
+      seconds.innerHTML = watch.getSeconds;
     }
   }
-  a++;
-  if (a <= 9) {
-    seconds.innerHTML = "0" + a;
+}
+
+function increseMinutes(val) {
+  if (watch.getMinutes > 59) {
+    watch.updateMinutes = 0;
+    increseHours();
   } else {
-    seconds.innerHTML = a;
+    watch.updateMinutes = watch.getMinutes + 1;
+    if (watch.getSeconds <= 9) {
+      minutes.innerHTML = "0" + watch.getMinutes;
+    } else {
+      minutes.innerHTML = watch.getMinutes;
+    }
   }
 }
-// function check the seconds and return it
-function checkSeconds(a) {
-  if (a > 10) {
-    return -1;
+
+function increseHours(val) {
+  watch.updateHours = watch.getHours + 1;
+  if (watch.getHours <= 9) {
+    hours.innerHTML = "0" + watch.getMinutes;
   } else {
-    return a;
-  }
-}
-// function check the minutes and return it
-function checkMinutes(b) {
-  if (b > 59) {
-    return -1;
-  } else {
-    return b;
-  }
-}
-// function check the hours and return it
-function checkHours(c) {
-  if (c > 59) {
-    return -1;
-  } else {
-    return c;
+    hours.innerHTML = watch.getMinutes;
   }
 }
