@@ -1,5 +1,11 @@
-# clock-app
-this is a clock application that contain maney useful features 
+# Javascript playground (stop watch)
 
-## 1\ featsure stop watch:
-this app contain a stop watch timer,and its responsive
+## built with
+
+- html
+- css
+- javascript
+
+## screenshot
+
+![](./screenshot.jpg)
